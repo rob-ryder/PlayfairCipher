@@ -77,4 +77,5 @@ RSpec.configure do |config|
 =end
 end
 
-require_relative '../lib/playfair_cipher'
+require_relative '../lib/cipher/playfair_cipher'
+require_relative '../lib/message'

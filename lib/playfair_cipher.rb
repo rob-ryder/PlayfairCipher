@@ -1,5 +1,0 @@
-class PlayfairCipher
-  
-  
-  
-end

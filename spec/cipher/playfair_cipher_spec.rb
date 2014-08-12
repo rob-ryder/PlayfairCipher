@@ -1,5 +1,3 @@
 describe PlayfairCipher do
   
-  
-  
 end
