@@ -1,0 +1,5 @@
+describe PlayfairCipher do
+  
+  
+  
+end
