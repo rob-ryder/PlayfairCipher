@@ -1,3 +1,0 @@
-describe Message do
-  
-end
