@@ -2,7 +2,6 @@
 describe PcMessage do
 
   let(:plain_message){'The quick brown fox jumps over the lazy dog.'}
-  let(:message_pairs){['TH','EQ','UI','CK','BR','OW','NF','OX','JU','MP','SO','VE','RT','HE','LA','ZY','DO','GX']}
   
   describe '.valid?' do
     it 'should return false if string is empty' do
@@ -34,15 +33,11 @@ describe PcMessage do
     end
   end
   
-  describe '#character_pairs' do
+  describe '#digraphs' do
     it 'should return an array' do
-      return_val = described_class.new(plain_message).character_pairs
+      return_val = described_class.new(plain_message).digraphs
       expect(return_val).to be_an_instance_of(Array)
     end
-    it 'should return the correct message parts for it\'s message' do
-      return_val = described_class.new(plain_message).character_pairs
-      expect(return_val).to eql(message_pairs)
-    end
   end
-  
+    
 end

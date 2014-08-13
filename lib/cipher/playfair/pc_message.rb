@@ -5,13 +5,13 @@ class PcMessage
     return true
   end
   
-  attr_reader :raw, :clean, :character_pairs
+  attr_reader :raw, :clean, :digraphs
   
   def initialize(message)
     @raw = message.to_s
     @clean = build_clean
     raise 'Invalid message (cannot be cleaned into a valid message string)' unless self.class.valid?(self.clean)
-    @character_pairs = build_character_pairs
+    @digraphs = build_digraphs
   end
   
   private
@@ -24,21 +24,21 @@ class PcMessage
     return final.upcase
   end
   
-  def build_character_pairs
-    pairs = []
+  def build_digraphs
+    digraphs = []
     pair = []
     self.clean.each_char do |char|
       pair << char
       if pair.length==2
-        pairs << pair.join
+        digraphs << PcMessageDigraph.new(pair[0],pair[1])
         pair = []
       end
     end
-    if pair.length
+    if pair.length==1
       pair << 'X'
-      pairs << pair.join
+      digraphs << PcMessageDigraph.new(pair[0],pair[1])
     end
-    return pairs
+    return digraphs
   end
-  
+
 end
