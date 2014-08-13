@@ -24,6 +24,44 @@ class PcGrid
   def fetch(coord)
     return self.to_a[coord.row][coord.col]
   end
+  
+  def fetch_right(coord)
+    row = coord.row
+    col = coord.col+1
+    col = 0 if col > 4
+    return fetch(PcGridCoord.new(row,col))
+  end
+  
+  def fetch_left(coord)
+    row = coord.row
+    col = coord.col-1
+    col = 4 if col < 0
+    return fetch(PcGridCoord.new(row,col))
+  end
+  
+  def fetch_above(coord)
+    col = coord.col
+    row = coord.row-1
+    row = 4 if row < 0
+    return fetch(PcGridCoord.new(row,col))
+  end
+  
+  def fetch_below(coord)
+    col = coord.col
+    row = coord.row+1
+    row = 0 if row > 4
+    return fetch(PcGridCoord.new(row,col))
+  end
+  
+  def fetch_opposite_corners(first_coord,last_coord)
+    f_row = first_coord.row
+    f_col = last_coord.col
+    first_char = fetch(PcGridCoord.new(f_row,f_col))
+    l_row = last_coord.row
+    l_col = first_coord.col
+    last_char = fetch(PcGridCoord.new(l_row,l_col))
+    return (first_char+last_char)
+  end
 
   private
   

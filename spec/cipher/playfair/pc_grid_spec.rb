@@ -100,5 +100,57 @@ describe PcGrid do
       expect(obj.fetch(coord_obj)).to eql('I')
     end
   end
+
+  describe '#fetch_right' do
+    it 'returns the char one step right of the given coord' do
+      coord = PcGridCoord.new(0,0)
+      expect(obj.fetch_right(coord)).to eql('A')
+    end
+    it 'returns the leftmost char, if rightmost coord is given' do
+      coord = PcGridCoord.new(0,4)
+      expect(obj.fetch_right(coord)).to eql('V')
+    end
+  end
   
+  describe '#fetch_left' do
+    it 'returns the char one step left of the given coord' do
+      coord = PcGridCoord.new(4,4)
+      expect(obj.fetch_left(coord)).to eql('X')
+    end
+    it 'returns the rightmost char, if leftmost coord is given' do
+      coord = PcGridCoord.new(4,0)
+      expect(obj.fetch_left(coord)).to eql('Z')
+    end
+  end
+
+  describe '#fetch_above' do
+    it 'returns the char one step above of the given coord' do
+      coord = PcGridCoord.new(4,4)
+      expect(obj.fetch_above(coord)).to eql('S')
+    end
+    it 'returns the bottom-most char, if top-most coord is given' do
+      coord = PcGridCoord.new(0,4)
+      expect(obj.fetch_above(coord)).to eql('Z')
+    end
+  end
+
+  describe '#fetch_below' do
+    it 'returns the char one step below of the given coord' do
+      coord = PcGridCoord.new(0,0)
+      expect(obj.fetch_below(coord)).to eql('K')
+    end
+    it 'returns the top-most char, if bottom-most coord is given' do
+      coord = PcGridCoord.new(4,0)
+      expect(obj.fetch_below(coord)).to eql('V')
+    end
+  end
+
+  describe '#fetch_opposite_corners' do
+    it 'returns the chars from the opposite corners of the given coords' do
+      first_coord = PcGridCoord.new(2,1)
+      last_coord  = PcGridCoord.new(4,4)
+      expect(obj.fetch_opposite_corners(first_coord,last_coord)).to eql('MU')
+    end
+  end
+
 end
