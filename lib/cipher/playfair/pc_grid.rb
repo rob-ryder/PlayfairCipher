@@ -8,6 +8,22 @@ class PcGrid
     @alphabet = build_alphabet
     @to_a = build_array
   end
+  
+  def locate(char)
+    raise 'Given char is not valid' unless (char.is_a?(String) && char.match(/^[A-Z]{1}$/))
+    self.to_a.each_with_index do |col_arr,row_num|
+      col_arr.each_with_index do |grid_char,col_num|
+        if (char==grid_char || (char=='J' && grid_char=='I'))
+          return PcGridCoord.new(row_num,col_num)
+        end
+      end
+    end
+    raise 'Could not find char in grid'
+  end
+  
+  def fetch(coord)
+    return self.to_a[coord.row][coord.col]
+  end
 
   private
   
