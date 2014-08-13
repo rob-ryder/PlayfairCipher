@@ -5,14 +5,18 @@ class PcMessage
     return true
   end
   
-  attr_reader :raw
+  attr_reader :raw, :clean, :character_pairs
   
   def initialize(message)
     @raw = message.to_s
+    @clean = build_clean
     raise 'Invalid message (cannot be cleaned into a valid message string)' unless self.class.valid?(self.clean)
+    @character_pairs = build_character_pairs
   end
   
-  def clean
+  private
+  
+  def build_clean
     final = ''
     raw.each_char do |char|
       final << char if char.match(/[a-zA-Z]/)
@@ -20,7 +24,7 @@ class PcMessage
     return final.upcase
   end
   
-  def character_pairs
+  def build_character_pairs
     pairs = []
     pair = []
     self.clean.each_char do |char|
