@@ -12,13 +12,25 @@ describe PcMessageDigraph do
 
   describe '#last_char' do
     it 'returns a string' do
-      expect(described_class.new('A','B').last_char).to be_an_instance_of(String)
+      expect(described_class.new('A','A').last_char).to be_an_instance_of(String)
     end
-    it 'returns equal to what it was initialized with when last char and first char were not the same' do
-      expect(described_class.new('A','B').last_char).to eql('B')
+    it 'always returns equal to what it was initialized with' do
+      expect(described_class.new('A','A').last_char).to eql('A')
     end
-    it 'returns "X" when initialized with matching first and last chars' do
-      expect(described_class.new('A','A').last_char).to eql('X')
+  end
+  
+  describe '#remove_duplicates' do
+    it 'replaces last_char with an "X" if it matches first_char' do
+      obj = described_class.new('A','A')
+      expect(obj.last_char).to eql('A')
+      obj.remove_duplicates
+      expect(obj.last_char).to eql('X')
+    end
+    it 'has no effect if first_char does not match last_char' do
+      obj = described_class.new('A','B')
+      expect(obj.last_char).to eql('B')
+      obj.remove_duplicates
+      expect(obj.last_char).to eql('B')
     end
   end
 

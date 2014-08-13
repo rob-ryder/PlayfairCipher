@@ -18,6 +18,7 @@ class PlayfairCipher
     encrypted = ''
     message = PcMessage.new(string)
     message.digraphs.each do |digraph|
+      digraph.remove_duplicates
       first_char_coords  = grid.locate(digraph.first_char)
       second_char_coords = grid.locate(digraph.last_char)
       pair_shape = PcGridShape.new(first_char_coords,second_char_coords)
